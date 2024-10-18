@@ -10,10 +10,10 @@ RUN pip install 'SQLAlchemy<2.0'
 
 # Create the .rasa directory and ensure permissions
 RUN mkdir -p /app/.rasa && chmod -R 777 /app/.rasa
-RUN chmod -R 777 /app/config.yml
 
 COPY . /app
 
+RUN chmod -R 777 /app/config.yml
 
 
 EXPOSE 5005
