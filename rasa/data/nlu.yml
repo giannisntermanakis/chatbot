@@ -1,12 +1,21 @@
-version: "2.0"
+version: "3.1"
 nlu:
-- intent: greet
-  examples: |
-    - hello
-    - hi
-    - hey there
+  - intent: greet
+    examples: |
+      - Γεια σας
+      - Καλημέρα
+      - Καλησπέρα
+      - Χαίρετε
 
-- intent: ask_weather
-  examples: |
-    - What's the weather like in [Athens](city)?
-    - Tell me the weather in [Paris](city)
+  - intent: ask_weather
+    examples: |
+      - Πώς είναι ο καιρός στην [Αθήνα](city);
+      - Θέλω να μάθω τον καιρό στην [Πάτρα](city)
+      - Μπορείς να μου πεις τον καιρό στην [Θεσσαλονίκη](city);
+
+  - intent: goodbye
+    examples: |
+      - Αντίο
+      - Τα λέμε
+      - Καληνύχτα
+      - Εις το επανιδείν

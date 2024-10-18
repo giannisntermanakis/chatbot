@@ -1,17 +1,26 @@
-version: "2.0"
+version: "3.1"
+
 intents:
   - greet
   - ask_weather
+  - goodbye
 
 entities:
   - city
 
+slots:
+  city:
+    type: text
+
 responses:
   utter_greet:
-    - text: "Hello! How can I help you?"
+    - text: "Γεια σας! Πώς μπορώ να σας βοηθήσω;"
 
   utter_ask_weather:
-    - text: "Sure, which city would you like the weather for?"
+    - text: "Σε ποια πόλη θέλετε να μάθετε τον καιρό;"
+
+  utter_goodbye:
+    - text: "Αντίο! Καλή σας ημέρα!"
 
 actions:
   - action_get_weather
