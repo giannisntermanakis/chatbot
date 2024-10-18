@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    platform: linux/amd64  # Add this line
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - rasa
+  
+  rasa:
+    platform: linux/amd64  # Add this line
+    build: ./rasa
+    volumes:
+      - ./rasa:/app
+    ports:
+      - '5005:5005'
+    environment:
+      - SQLALCHEMY_SILENCE_UBER_WARNING=1
+      - PYTHONWARNINGS=ignore:DeprecationWarning
+    command: >
+      run --enable-api --cors "*" --model /app/models
