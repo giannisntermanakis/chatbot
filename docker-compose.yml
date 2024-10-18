@@ -1,28 +1,26 @@
 version: '3.8'
 
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - '3000:3000'
-    platform: linux/amd64  # Add this line
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    depends_on:
-      - rasa
-  
   rasa:
-    platform: linux/amd64  # Add this line
-    build: ./rasa
+    build: ./  # Points to the current directory (rasa)
     volumes:
-      - ./rasa:/app
+      - ./:/app  # Mount the `rasa/` directory inside the container
     ports:
-      - '5005:5005'
-    environment:
-      - SQLALCHEMY_SILENCE_UBER_WARNING=1
-      - PYTHONWARNINGS=ignore:DeprecationWarning
+      - "5005:5005"  # Rasa server port
     command: >
-      run --enable-api --cors "*" --model /app/models
+      run --enable-api --cors "*"
+    # environment:
+    #   - SQLALCHEMY_SILENCE_UBER_WARNING=1
+    #   - PYTHONWARNINGS=ignore:DeprecationWarning
+    # command: >
+    #   run --enable-api --cors "*" --model /app/models
+    depends_on:
+      - actions
+
+  actions:
+    build: ./actions  # Points to the `actions/` folder inside `rasa/`
+    volumes:
+      - ./actions:/app  # Mount the `actions` directory inside the container
+    ports:
+      - "5055:5055"  # Custom actions server port
+    command: rasa run actions
