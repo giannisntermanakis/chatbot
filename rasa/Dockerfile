@@ -7,6 +7,9 @@ RUN pip install 'SQLAlchemy<2.0'
 
 COPY . /app
 
+RUN chmod -R 777 /app/config.yml
+
+
 EXPOSE 5005
 
 CMD ["run", "--enable-api", "--cors", "*", "--model", "/app/models"]
