@@ -5,25 +5,26 @@ language: "el"  # Greek language support
 # assistant_id: 'sda'??
 
 pipeline:
-  - name: WhitespaceTokenizer  # Tokenizes text by splitting at whitespace
-  - name: RegexFeaturizer
-  - name: CountVectorsFeaturizer
-    analyzer: "char_wb"
-    min_ngram: 1
-    max_ngram: 4
-  - name: LexicalSyntacticFeaturizer
-  - name: DIETClassifier  # Handles intent classification and entity recognition
-    epochs: 100
-  - name: EntitySynonymMapper
-  - name: ResponseSelector  # Handles FAQ interactions
-    epochs: 100
-  - name: FallbackClassifier
-    threshold: 0.3
-    ambiguity_threshold: 0.1
+- name: WhitespaceTokenizer    # Tokenizes text by splitting at whitespace
+- name: RegexFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: "char_wb"
+  min_ngram: 1
+  max_ngram: 4
+- name: LexicalSyntacticFeaturizer
+- name: DIETClassifier    # Handles intent classification and entity recognition
+  epochs: 100
+- name: EntitySynonymMapper
+- name: ResponseSelector    # Handles FAQ interactions
+  epochs: 100
+- name: FallbackClassifier
+  threshold: 0.3
+  ambiguity_threshold: 0.1
 
 policies:
-  - name: MemoizationPolicy  # Remembers exact training stories
-  - name: RulePolicy  # Handles rules
-  - name: TEDPolicy  # Machine learning-based conversation flow
-    max_history: 5
-    epochs: 100
+- name: MemoizationPolicy    # Remembers exact training stories
+- name: RulePolicy    # Handles rules
+- name: TEDPolicy    # Machine learning-based conversation flow
+  max_history: 5
+  epochs: 100
+assistant_id: 20241018-102739-each-debug

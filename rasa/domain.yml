@@ -11,6 +11,9 @@ entities:
 slots:
   city:
     type: text
+    mappings:
+      - type: from_entity
+        entity: city
 
 responses:
   utter_greet:
