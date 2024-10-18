@@ -5,6 +5,9 @@ WORKDIR /app
 # Pin SQLAlchemy to a version lower than 2.0
 RUN pip install 'SQLAlchemy<2.0'
 
+# Create the .rasa directory and ensure permissions
+RUN mkdir -p /app/.rasa && chmod -R 777 /app/.rasa
+
 COPY . /app
 
 RUN chmod -R 777 /app/config.yml
